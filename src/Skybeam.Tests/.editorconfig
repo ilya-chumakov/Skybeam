@@ -1,0 +1,5 @@
+# C# files
+[*.cs]
+
+resharper_redundant_using_directive_highlighting=hint
+resharper_check_namespace_highlighting=hint
