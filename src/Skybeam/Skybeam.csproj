@@ -9,9 +9,9 @@
     <!--<OutputItemType>Analyzer</OutputItemType>-->
     <!--<PackageType>Analyzer</PackageType>-->
     <!--<IsPackable>true</IsPackable>-->
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IncludeBuildOutput>true</IncludeBuildOutput>
-    <Version>0.0.18</Version>
+    <Version>0.1.0-beta1</Version>
   </PropertyGroup>
 
   <ItemGroup>

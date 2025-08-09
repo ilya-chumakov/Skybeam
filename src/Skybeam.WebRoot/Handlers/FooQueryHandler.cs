@@ -1,4 +1,4 @@
-﻿using Demo.DecoratedHandlers.Abstractions;
+﻿using Skybeam.Abstractions;
 
 namespace Skybeam.WebRoot.Handlers;
 

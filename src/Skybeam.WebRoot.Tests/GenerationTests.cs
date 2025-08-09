@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
-using Demo.DecoratedHandlers.Abstractions;
-using Demo.DecoratedHandlers.Gen;
+using Skybeam.Abstractions;
 using FancyGlobalPrefix;
 using FancyGlobalPrefix.Skybeam.WebRoot.Handlers;
 using FluentAssertions;
@@ -38,8 +37,7 @@ public class GenerationTests
             //IPipelineBehavior<FooQuery, FooResponse>,
             FooSecondBehavior<FooQuery, FooResponse>>();
 
-        //new PipelineRegistry().Apply(services);
-        services.AddDecoratedHandlers<PipelineRegistry>();
+        services.AddSkybeam<PipelineRegistry>();
 
         var provider = services.BuildServiceProvider();
 

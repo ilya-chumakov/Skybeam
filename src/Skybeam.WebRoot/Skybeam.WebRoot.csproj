@@ -7,8 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Demo.DecoratedHandlers.Gen" Version="1.0.18" />
-    <PackageReference Include="Demo.DecoratedHandlers.Abstractions" Version="0.0.3" />
+    <PackageReference Include="Skybeam" Version="0.1.0-beta1" />
   </ItemGroup>
 
   <ItemGroup>
