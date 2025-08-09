@@ -17,7 +17,7 @@ public class AddDecoratedHandlersExtension_AssemblyScan_Tests
         Assert.False(DummyRegistry.IsInvoked);
 
         //Act
-        services.AddDecoratedHandlers(options =>
+        services.AddSkybeam(options =>
         {
             options.ScanAssemblies = [typeof(DummyRegistry).Assembly];
         });
@@ -27,7 +27,7 @@ public class AddDecoratedHandlersExtension_AssemblyScan_Tests
         Assert.True(DummyRegistry.IsInvoked);
 
         //Assert #2: no new registrations
-        services.AddDecoratedHandlers(options =>
+        services.AddSkybeam(options =>
         {
             options.ScanAssemblies = [typeof(DummyRegistry).Assembly];
         });
@@ -57,14 +57,14 @@ public class AddDecoratedHandlersExtension_GenericParam_Tests
         Assert.False(DummyRegistry.IsInvoked);
 
         //Act
-        services.AddDecoratedHandlers<DummyRegistry>();
+        services.AddSkybeam<DummyRegistry>();
         int expected = services.Count;
 
         //Assert
         Assert.True(DummyRegistry.IsInvoked);
 
         //Assert #2 : no new registrations
-        services.AddDecoratedHandlers<DummyRegistry>();
+        services.AddSkybeam<DummyRegistry>();
         Assert.Equal(expected, services.Count);
     }
 

@@ -4,7 +4,7 @@ namespace Skybeam;
 
 internal class DelayedLog
 {
-    List<Action<ILogger>> _logs = [];
+    private List<Action<ILogger>> _logs = [];
 
     internal void Add(Action<ILogger> log)
     {
@@ -17,7 +17,7 @@ internal class DelayedLog
         {
             if (_logs != null) return _logs;
 
-            throw new NotSupportedException("Logs can't be accessed after Erase() has been called.");
+            throw new NotSupportedException("Logs can't be accessed after Release() has been called.");
         }
     }
 
@@ -29,7 +29,7 @@ internal class DelayedLog
         }
     }
 
-    public void Erase()
+    public void Release()
     {
         _logs = null;
     }

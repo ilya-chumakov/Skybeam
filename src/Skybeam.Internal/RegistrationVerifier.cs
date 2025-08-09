@@ -72,6 +72,6 @@ internal class RegistrationVerifier(DelayedLog log)
 
     public void VerifyRegistry(IPipelineRegistry registry)
     {
-        //todo
+        //nothing to verify now
     }
 }

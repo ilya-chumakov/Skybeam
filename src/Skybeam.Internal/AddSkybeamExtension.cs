@@ -4,24 +4,24 @@ using Skybeam.Abstractions;
 
 namespace Skybeam;
 
-public class DemoOptions
+public class SkybeamOptions
 {
     public IReadOnlyCollection<Assembly> ScanAssemblies = null;
 }
 
 // InternalsVisibleTo won't work if directly called from another assembly
-public static class AddDecoratedHandlersExtension
+public static class AddSkybeamExtension
 {
     private static readonly Type RegistryInterface = typeof(IPipelineRegistry);
     private static readonly RegistrationVerifier Verifier;
     internal static readonly DelayedLog Log = new();
 
-    static AddDecoratedHandlersExtension()
+    static AddSkybeamExtension()
     {
         Verifier = new RegistrationVerifier(Log);
     }
 
-    public static void AddDecoratedHandlers<TPipelineRegistry>(
+    public static void AddSkybeam<TPipelineRegistry>(
         this IServiceCollection services)
         where TPipelineRegistry : IPipelineRegistry, new()
     {
@@ -32,11 +32,11 @@ public static class AddDecoratedHandlersExtension
         services.AddHostedService<DelayedLogHostedService>();
     }
 
-    public static void AddDecoratedHandlers(
+    public static void AddSkybeam(
         this IServiceCollection services,
-        Action<DemoOptions> setup = null)
+        Action<SkybeamOptions> setup = null)
     {
-        var options = new DemoOptions();
+        var options = new SkybeamOptions();
         setup?.Invoke(options);
 
         IEnumerable<Assembly> assemblies = options.ScanAssemblies;
