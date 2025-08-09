@@ -10,9 +10,10 @@ public static class IndentedTextWriterExtensions
         writer.Indent++;
     }
 
-    public static void CloseBlock(this IndentedTextWriter writer)
+    public static void CloseBlock(this IndentedTextWriter writer, bool newLine = true)
     {
         writer.Indent--;
-        writer.WriteLine("}");
+        
+        if (newLine) writer.WriteLine("}"); else writer.Write("}");
     }
 }

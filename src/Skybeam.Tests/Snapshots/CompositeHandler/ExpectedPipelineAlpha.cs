@@ -25,17 +25,17 @@ public class BarHandlerPipeline(IServiceProvider provider) : InterfaceAlias
         CancellationToken ct = default)
     {
         var handler = provider.GetRequiredService<
-            global::Skybeam.Tests.Snapshots.CompositeHandler.BarHandler>(); 
-
+            global::Skybeam.Tests.Snapshots.CompositeHandler.BarHandler>();
+        
         DelegateAlias original = () => handler.HandleAsync(input, ct);
-
+        
         var b0 = provider.GetRequiredService<
             global::Skybeam.Tests.Snapshots.CompositeHandler.LogBehavior<
                 global::Skybeam.Tests.Snapshots.CompositeHandler.Alpha,
                 global::Skybeam.Tests.Snapshots.CompositeHandler.Omega>>();
-
+        
         DelegateAlias f0 = () => b0.HandleAsync(input, original, ct);
-
+        
         return f0();
     }
 }

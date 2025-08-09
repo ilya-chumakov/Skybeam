@@ -25,17 +25,17 @@ public class FooPipeline(IServiceProvider provider) : InterfaceAlias
         CancellationToken ct = default)
     {
         var handler = provider.GetRequiredService<
-            global::Skybeam.Tests.Snapshots.SameName.HandlerNamespace.Foo>(); 
-
+            global::Skybeam.Tests.Snapshots.SameName.HandlerNamespace.Foo>();
+        
         DelegateAlias original = () => handler.HandleAsync(input, ct);
-
+        
         var b0 = provider.GetRequiredService<
             global::Skybeam.Tests.Snapshots.SameName.BehaviorNamespace.Foo<
                 global::Skybeam.Tests.Snapshots.SameName.RequestNamespace.Foo,
                 global::Skybeam.Tests.Snapshots.SameName.ResponseNamespace.Foo>>();
-
+        
         DelegateAlias f0 = () => b0.HandleAsync(input, original, ct);
-
+        
         return f0();
     }
 }
