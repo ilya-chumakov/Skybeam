@@ -21,7 +21,7 @@ public static class AddSkybeamExtension
         Verifier = new RegistrationVerifier(Log);
     }
 
-    public static void AddSkybeam<TPipelineRegistry>(
+    public static SkybeamFluentBuilder AddSkybeam<TPipelineRegistry>(
         this IServiceCollection services)
         where TPipelineRegistry : IPipelineRegistry, new()
     {
@@ -30,9 +30,11 @@ public static class AddSkybeamExtension
         Verifier.VerifyServices(services);
         Verifier.VerifyRegistry(registry);
         services.AddHostedService<DelayedLogHostedService>();
+
+        return new SkybeamFluentBuilder(services);
     }
 
-    public static void AddSkybeam(
+    public static SkybeamFluentBuilder AddSkybeam(
         this IServiceCollection services,
         Action<SkybeamOptions> setup = null)
     {
@@ -72,6 +74,8 @@ public static class AddSkybeamExtension
         Verifier.VerifyRegistryCount(foundTypes);
         Verifier.VerifyServices(services);
         services.AddHostedService<DelayedLogHostedService>();
+        
+        return new SkybeamFluentBuilder(services);
     }
 
     private static IPipelineRegistry InvokeApplyMethod(Type registryType, object[] parameters)

@@ -12,32 +12,26 @@ using Skybeam.WebRoot.Handlers;
 
 namespace Skybeam.WebRoot.Tests;
 
-public class GenerationTests
+public class WebRootTests
 {
     private readonly InMemoryLoggerProvider loggerProvider = new();
     private readonly ServiceCollection services = new();
 
-    public GenerationTests(ITestOutputHelper output)
+    public WebRootTests(ITestOutputHelper output)
     {
         services.AddLogging();
         services.AddSingleton<ILoggerProvider>(loggerProvider);
     }
 
     [Fact]
-    public async Task AddPipelines_WrapperIsGenerated_HandlerIsReplaced()
+    public async Task WebRoot_UseGeneratedCode_PipelineIsResolvedAndCorrect()
     {
         services.AddTransient<IRequestHandler<FooQuery, FooResponse>, FooQueryHandler>();
         
-        //todo register by interface, resolve as IEnumerable<T>
-        services.AddTransient<
-            //IPipelineBehavior<FooQuery, FooResponse>,
-            FooFirstBehavior<FooQuery, FooResponse>>();
-
-        services.AddTransient<
-            //IPipelineBehavior<FooQuery, FooResponse>,
-            FooSecondBehavior<FooQuery, FooResponse>>();
-
-        services.AddSkybeam<PipelineRegistry>();
+        services.AddSkybeam<PipelineRegistry>()
+            .AddBehavior(typeof(FirstBehavior<,>))
+            .AddBehavior(typeof(SecondBehavior<,>))
+            ;
 
         var provider = services.BuildServiceProvider();
 
@@ -49,14 +43,15 @@ public class GenerationTests
         actual.GetType().Should().Be(typeof(FooQueryHandlerPipeline));
 
         // Assert: decorators are called
-        await actual.HandleAsync(new FooQuery(), CancellationToken.None);
+        FooResponse output = await actual.HandleAsync(new FooQuery(), CancellationToken.None);
 
-        var logs = loggerProvider.Logs.Informations.ToList();
-        logs[0].Message.Should().BeEquivalentTo($"Hello from the behavior #1. Decorating {nameof(FooQuery)}.");
-        logs[0].Message.Should().BeEquivalentTo($"Hello from the behavior #2. Decorating {nameof(FooQuery)}.");
-        logs[2].Message.Should().BeEquivalentTo("FooQueryHandler is called!");
-        logs[3].Message.Should().BeEquivalentTo("Bye from the behavior #2");
-        logs[4].Message.Should().BeEquivalentTo("Bye from the behavior #1");
+        loggerProvider.Logs.Informations.Select(l => l.Message)
+            .Should().BeEquivalentTo(
+                FirstBehavior<FooQuery, FooResponse>.BeginMessage,
+                SecondBehavior<FooQuery, FooResponse>.BeginMessage,
+                FooQueryHandler.Message,
+                SecondBehavior<FooQuery, FooResponse>.EndMessage,
+                FirstBehavior<FooQuery, FooResponse>.EndMessage);
     }
 
     [Fact]

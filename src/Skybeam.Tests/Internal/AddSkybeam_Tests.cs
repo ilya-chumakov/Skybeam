@@ -1,17 +1,16 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Skybeam.Abstractions;
-using Skybeam;
 
 namespace Skybeam.Tests.Internal;
 
 // hard to isolate due to per-assembly registries
-public class AddDecoratedHandlersExtension_AssemblyScan_Tests
+public class AddSkybeam_AssemblyScan_Tests
 {
     // ReSharper disable once InconsistentNaming
     private readonly ServiceCollection services = new();
 
     [Fact]
-    public void AddDecoratedHandlers_AssemblyScan_OK()
+    public void AddSkybeam_AssemblyScan_OK()
     {
         //Arrange
         Assert.False(DummyRegistry.IsInvoked);
@@ -45,13 +44,13 @@ public class AddDecoratedHandlersExtension_AssemblyScan_Tests
     }
 }
 
-public class AddDecoratedHandlersExtension_GenericParam_Tests
+public class AddSkybeam_GenericParam_Tests
 {
     // ReSharper disable once InconsistentNaming
     private readonly ServiceCollection services = new();
 
     [Fact]
-    public void AddDecoratedHandlers_GenericParam_OK()
+    public void AddSkybeam_GenericParam_OK()
     {
         //Arrange
         Assert.False(DummyRegistry.IsInvoked);
@@ -59,7 +58,7 @@ public class AddDecoratedHandlersExtension_GenericParam_Tests
         //Act
         services.AddSkybeam<DummyRegistry>();
         int expected = services.Count;
-
+        
         //Assert
         Assert.True(DummyRegistry.IsInvoked);
 

@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Skybeam.Abstractions;
-using Skybeam;
 
 namespace Skybeam.Tests.Internal;
 

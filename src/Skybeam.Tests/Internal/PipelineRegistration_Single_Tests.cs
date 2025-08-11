@@ -6,7 +6,6 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Skybeam.Abstractions;
-using Skybeam;
 
 namespace Skybeam.Tests.Internal;
 

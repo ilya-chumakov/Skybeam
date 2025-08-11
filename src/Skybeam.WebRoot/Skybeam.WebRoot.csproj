@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Skybeam" Version="0.1.0-beta1" />
+    <PackageReference Include="Skybeam" Version="0.1.0-beta5" />
   </ItemGroup>
 
   <ItemGroup>
