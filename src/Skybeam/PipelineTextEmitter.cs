@@ -24,9 +24,6 @@ public static class PipelineTextEmitter
 
         string pipelineNamespace = $"{NamespacePrefix}.{handler.ContainingNamespace}";
         string pipelineType = $"{handler.Name}Pipeline{handler.PipelineSuffix}";
-        string targetFunc = "original";
-        string interfaceType = "InterfaceAlias";
-        string delegateType = "DelegateAlias";
 
         PipelineDescription pd = new
         (
@@ -40,7 +37,6 @@ public static class PipelineTextEmitter
         writer.WriteLine("using System;");
         writer.WriteLine("using System.Threading;");
         writer.WriteLine("using System.Threading.Tasks;");
-        //writer.WriteLine("using Microsoft.Extensions.DependencyInjection;");
         writer.WriteLine();
         writer.WriteLine("using Skybeam;");
         writer.WriteLine("using Skybeam.Abstractions;");

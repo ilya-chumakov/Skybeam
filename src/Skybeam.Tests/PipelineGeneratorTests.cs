@@ -64,10 +64,12 @@ public class PipelineGeneratorTests(ITestOutputHelper output)
         // optional, files are included in the project now, therefore step is no needed
         if (false)
         {
+#pragma warning disable CS0162 // Unreachable code detected
             foreach (var file in sourceFiles)
             {
                 CompilationHelper.AssertCompilation(file.Content);
             }
+#pragma warning restore CS0162 // Unreachable code detected
         }
 
         // text
