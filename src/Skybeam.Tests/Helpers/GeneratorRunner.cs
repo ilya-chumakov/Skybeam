@@ -5,6 +5,7 @@ using Skybeam.Abstractions;
 
 namespace Skybeam.Tests.Helpers;
 
+// todo remove?
 public static class GeneratorRunner
 {
     public static GeneratorDriverRunResult GetRunResult(string source)

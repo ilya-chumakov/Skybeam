@@ -13,8 +13,10 @@ public static class RegistrationExtensions
     {
         var descriptor = services.FirstOrDefault(d => d.ServiceType == typeof(TClosedInterface));
 
+        // todo double-check
+
         // no messing with auto-registations for now
-        if (descriptor == null) return;
+        //if (descriptor == null) return;
 
         var lifetime = descriptor?.Lifetime ?? ServiceLifetime.Transient;
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.Emit;
 
 namespace Skybeam.Tests.Helpers;
 
@@ -23,9 +24,9 @@ public class CompilationHelper
             references,
             new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
 
-        using var ms = new MemoryStream();
-        var result = compilation.Emit(ms);
-
+        using MemoryStream ms = new();
+        EmitResult result = compilation.Emit(ms);
+    
         if (result.Success)
         {
             Assert.True(true, "Compilation succeeded.");

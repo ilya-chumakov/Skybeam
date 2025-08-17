@@ -34,6 +34,7 @@ public class PipelineGenerator : IIncrementalGenerator
             .Where(static symbol => symbol != default)
             .Collect();
 
+        // todo disable if no longer needed? how to get behavior count?
         var behaviors = context.SyntaxProvider
             .CreateSyntaxProvider(
                 predicate: static (SyntaxNode node, CancellationToken _) => node is ClassDeclarationSyntax,
