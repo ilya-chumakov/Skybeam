@@ -52,6 +52,12 @@ public class PipelineGeneratorTests(ITestOutputHelper output)
         await VerifyGenerationFrom<Snapshots.PartialBehavior.SourceDescription>();
     }
 
+    [Fact]
+    public async Task GeneratorOutput_NestedHandler_OK()
+    {
+        await VerifyGenerationFrom<Snapshots.NestedHandler.SourceDescription>();
+    }
+
     private async Task VerifyGenerationFrom<TSourceDescription>()
         where TSourceDescription : SourceDescriptionBase, new()
     {
