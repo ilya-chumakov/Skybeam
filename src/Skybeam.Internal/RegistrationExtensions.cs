@@ -13,10 +13,11 @@ public static class RegistrationExtensions
     {
         var descriptor = services.FirstOrDefault(d => d.ServiceType == typeof(TClosedInterface));
 
-        // todo double-check
-
-        // no messing with auto-registations for now
-        //if (descriptor == null) return;
+        // Could require all handlers to be pre-registered.
+        // This requirement would not be of much use, since the source generator gathers info about
+        // all available handler types at compile-time.
+        // Therefore Skybeam can register handlers itself (not behaviors, where the order matters).
+        //// if (descriptor == null) return;
 
         var lifetime = descriptor?.Lifetime ?? ServiceLifetime.Transient;
 

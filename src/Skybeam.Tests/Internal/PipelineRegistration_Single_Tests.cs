@@ -112,17 +112,13 @@ public class PipelineRegistration_Single_Tests
     }
 
     [Fact]
-    public void ReplaceWithPipeline_NoRegistration_NoPipeline()
+    public void ReplaceWithPipeline_NoRegistration_AddBothHandlerAndPipeline()
     {
         //Act
         services.ReplaceWithPipeline<IRequestHandler<FooInput, FooOutput>, FooHandler, FooHandlerPipeline>();
 
         //Assert
-        For<IRequestHandler<FooInput, FooOutput>, FooHandler>().Should().BeEmpty();
-        For<FooHandler, FooHandler>().Should().BeEmpty();
-        
-        For<IRequestHandler<FooInput, FooOutput>, FooHandlerPipeline>().Should().BeEmpty();
-        For<FooHandlerPipeline, FooHandlerPipeline>().Should().BeEmpty();
+        AssertCorrectFooHandlerPipeline();
     }
 
     private IEnumerable<ServiceDescriptor> For<TKey, TImpl>()
