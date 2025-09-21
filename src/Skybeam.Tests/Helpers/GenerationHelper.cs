@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Text;
@@ -26,6 +27,15 @@ public static class GenerationHelper
                 content: SourceText.From(result.Content, Encoding.UTF8)
             ));
         }
-        await test.RunAsync();
+
+        try
+        {
+            await test.RunAsync();
+        }
+        catch (Exception ex)
+        {
+            const string prefix = "Source-generated file differs from a snapshot: ";
+            throw new Exception(prefix + Environment.NewLine + ex.Message, ex);
+        }
     }
 }
