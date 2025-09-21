@@ -29,15 +29,17 @@ public class TextHelper
         Assert.True(areEqual, output);
     }
 
-    public static void AssertEqualityWithDiffPlex(
+    /// <summary>
+    /// By DiffPlex
+    /// </summary>
+    public static string GetUnidiff(
         string expected, 
-        string actual,
-        ITestOutputHelper output)
+        string actual)
     {
         string expectedNormalized = LineEndingsHelper.Normalize(expected)
             .Replace("%VERSION%", typeof(PipelineTextEmitter).Assembly.GetName().Version?.ToString());
 
-        if (actual == expectedNormalized) return;
+        if (actual == expectedNormalized) return null;
 
         string unidiff = UnidiffRenderer.GenerateUnidiff(
             oldText: expectedNormalized, 
@@ -45,12 +47,7 @@ public class TextHelper
             contextLines: 3,
             ignoreWhitespace: false
         );
-
-        output.WriteLine("--- EXPECTED ---");
-        output.WriteLine(expected);
-        output.WriteLine("--- ACTUAL ---");
-        output.WriteLine(actual);
-
-        Assert.Fail(unidiff);
+        
+        return unidiff;
     }
 }

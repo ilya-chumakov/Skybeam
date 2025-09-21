@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Text;
 using Skybeam.Tests.Helpers;
@@ -68,17 +69,18 @@ public class PipelineGeneratorTests(ITestOutputHelper output)
 
         // compilation
         // optional, files are included in the project now, therefore step is no needed
+#pragma warning disable CS0162 // Unreachable code detected
         if (false)
         {
-#pragma warning disable CS0162 // Unreachable code detected
             foreach (var file in sourceFiles)
             {
                 CompilationHelper.AssertCompilation(file.Content);
             }
-#pragma warning restore CS0162 // Unreachable code detected
         }
+#pragma warning restore CS0162 // Unreachable code detected
 
         // text
+        var textResults = new List<ComparisonResult>();
         if (expectedFiles.Count > 0)
         {
             var pipelines = new List<PipelineDescription>(description.Handlers.Count);
@@ -90,25 +92,67 @@ public class PipelineGeneratorTests(ITestOutputHelper output)
 
                 string actual = text.ToString();
 
-                AssertEquality(expectedFiles[i], actual);
+                var pipelineResult = Compare(expectedFiles[i], actual);
 
                 pipelines.Add(pipeline);
+                textResults.Add(pipelineResult);
             }
 
             string actualContext = RegistryTextEmitter.CreateSourceText(pipelines).ToString();
 
-            AssertEquality(expectedFiles[^1], actualContext);
+            var registryResult = Compare(expectedFiles[^1], actualContext);
+            textResults.Add(registryResult);
         }
+
+        foreach (var r in textResults)
+        {
+            string status = r.IsSuccess ? "OK" : "DIFF";
+            output.WriteLine($"{r.ExpectedFileName}: {status}");
+        }
+
+        var errors = textResults.Where(x => !x.IsSuccess).ToList();
+        
+        for (int i = 0; i < errors.Count; i++)
+        {
+            var r = errors[i];
+            output.WriteLine("");
+            output.WriteLine($"/////// Diff details #{i} begin: {r.ExpectedFileName}");
+            output.WriteLine("/////// Diff: ");
+            output.WriteLine(r.Diff);
+            output.WriteLine("");
+            output.WriteLine("/////// Expected: ");
+            output.WriteLine(r.ExpectedContent);
+            output.WriteLine("");
+            output.WriteLine("/////// Actual:");
+            output.WriteLine(r.ActualContent);
+            output.WriteLine($"/////// Diff details #{i} end: {r.ExpectedFileName}");
+        }
+
+        if (errors.Count > 0) Assert.Fail("Emitted text differs from a snapshot!");
 
         // generation
         await GenerationHelper.AssertGenerationEquality(sourceFiles, expectedFiles);
     }
 
-    private void AssertEquality(TestFile expectedFile, string actual)
+    private ComparisonResult Compare(TestFile expectedFile, string actual)
     {
-        output.WriteLine("Asserting with the expected file: " + expectedFile.Name);
-        output.WriteLine("");
+        string diff = TextHelper.GetUnidiff(expectedFile.Content, actual);
 
-        TextHelper.AssertEqualityWithDiffPlex(expectedFile.Content, actual, output);
+        return new ComparisonResult
+        {
+            ExpectedFileName = expectedFile.Name,
+            ExpectedContent = expectedFile.Content,
+            ActualContent = actual,
+            Diff = diff
+        };
     }
 }
+
+public readonly record struct ComparisonResult(
+    string ExpectedFileName,
+    string ExpectedContent,
+    string ActualContent,
+    string Diff)
+{
+    public bool IsSuccess => string.IsNullOrWhiteSpace(Diff);
+};
