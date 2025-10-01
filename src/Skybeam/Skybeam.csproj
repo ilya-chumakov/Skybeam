@@ -11,7 +11,7 @@
     <!--<IsPackable>true</IsPackable>-->
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IncludeBuildOutput>true</IncludeBuildOutput>
-    <Version>0.1.0-beta5</Version>
+    <Version>0.1.0-beta6</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,9 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference 
-      Include="..\Skybeam.Internal\Skybeam.Internal.csproj" 
-      PrivateAssets="all" />
+    <ProjectReference Include="..\Skybeam.Internal\Skybeam.Internal.csproj" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>

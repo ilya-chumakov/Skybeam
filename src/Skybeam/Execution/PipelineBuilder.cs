@@ -1,9 +1,17 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using Microsoft.Extensions.DependencyInjection;
 using Skybeam.Abstractions;
 
+// ReSharper disable CheckNamespace
 namespace Skybeam;
 
-// todo to internal
+/// <summary>
+///     Pre-tested logic.
+///     Referenced by the generated code, therefore can't be internal.
+/// </summary>
 public static class PipelineBuilder
 {
     public static RequestHandlerDelegate<TOutput> Decorate<THandler, TInput, TOutput>(
@@ -15,10 +23,10 @@ public static class PipelineBuilder
         var handler = provider.GetRequiredService<THandler>();
 
         var behaviors = provider.GetRequiredService<IEnumerable<IPipelineBehavior<TInput, TOutput>>>().Reverse();
-
+        // todo precompiled chain
         RequestHandlerDelegate<TOutput> orig = () => handler.HandleAsync(input, ct);
         RequestHandlerDelegate<TOutput> prev = orig;
-        
+
         foreach (var behavior in behaviors)
         {
             RequestHandlerDelegate<TOutput> tmp = prev;
