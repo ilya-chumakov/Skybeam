@@ -9,6 +9,7 @@ using Skybeam.Abstractions;
 using Skybeam.Tests.Helpers;
 using Skybeam.Tests.Models;
 using Skybeam.Tests.Snapshots.OneBehavior;
+#pragma warning disable IDE0001
 
 namespace Skybeam.Tests;
 
@@ -29,7 +30,7 @@ public class PipelineRegistry_Tests
 
         string[] sources = sourceFiles.Select(x => x.Content).ToArray();
 
-        Assembly assembly = CompilationHelperV2.RunGenerator(generator, sources);
+        Assembly assembly = CompilationHelper.RunFull(sources, generator);
         
         string sourceNamespace = "Skybeam.Tests.Snapshots.OneBehavior";
         string pipelineNamespace = $"{PipelineTextEmitter.NamespacePrefix}.Skybeam.Tests.Snapshots.OneBehavior";

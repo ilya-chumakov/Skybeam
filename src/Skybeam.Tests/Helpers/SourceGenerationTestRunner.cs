@@ -7,7 +7,7 @@ using Skybeam.Tests.Models;
 
 namespace Skybeam.Tests.Helpers;
 
-public static class GenerationHelper
+public static class SourceGenerationTestRunner
 {
     public static async Task AssertGenerationEquality(
         List<TestFile> sourceFiles, 

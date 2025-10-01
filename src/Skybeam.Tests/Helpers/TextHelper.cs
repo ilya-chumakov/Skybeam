@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using DiffPlex.Renderer;
 using Microsoft.CodeAnalysis.Text;
 
-//using Xunit.Abstractions;
-
 namespace Skybeam.Tests.Helpers;
 
 public class TextHelper

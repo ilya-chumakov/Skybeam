@@ -3,10 +3,10 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Skybeam.Abstractions;
 
-namespace Skybeam.Tests.Helpers;
+namespace Skybeam.Tests.Helpers.Legacy;
 
-// todo remove?
-public static class GeneratorRunner
+//todo
+public static class LegacyGeneratorRunner
 {
     public static GeneratorDriverRunResult GetRunResult(string source)
     {

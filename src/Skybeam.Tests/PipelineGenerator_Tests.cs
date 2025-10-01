@@ -3,13 +3,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Text;
 using Skybeam.Tests.Helpers;
+using Skybeam.Tests.Helpers.Legacy;
 using Skybeam.Tests.Models;
-
-//using Xunit.Abstractions;
 
 namespace Skybeam.Tests;
 
-public class PipelineGeneratorTests(ITestOutputHelper output)
+public class PipelineGenerator_Tests(ITestOutputHelper output)
 {
     [Fact]
     public async Task GeneratorOutput_NoBehavior_OK()
@@ -74,7 +73,7 @@ public class PipelineGeneratorTests(ITestOutputHelper output)
         {
             foreach (var file in sourceFiles)
             {
-                CompilationHelper.AssertCompilation(file.Content);
+                LegacyCompilationHelper.AssertCompilation(file.Content);
             }
         }
 #pragma warning restore CS0162 // Unreachable code detected
@@ -128,10 +127,10 @@ public class PipelineGeneratorTests(ITestOutputHelper output)
             output.WriteLine($"/////// Diff details #{i} end: {r.ExpectedFileName}");
         }
 
-        //if (errors.Count > 0) Assert.Fail("Emitted text differs from a snapshot!");
+        if (errors.Count > 0) Assert.Fail("Emitted text differs from a snapshot!");
 
         // generation
-        await GenerationHelper.AssertGenerationEquality(sourceFiles, expectedFiles);
+        await SourceGenerationTestRunner.AssertGenerationEquality(sourceFiles, expectedFiles);
     }
 
     private ComparisonResult Compare(TestFile expectedFile, string actual)

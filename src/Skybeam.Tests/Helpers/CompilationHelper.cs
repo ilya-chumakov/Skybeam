@@ -1,49 +1,53 @@
-﻿using System;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Skybeam;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Emit;
+using System.Reflection;
 
-namespace Skybeam.Tests.Helpers;
-
-public class CompilationHelper
+public static class CompilationHelper
 {
-    public static void AssertCompilation(string source)
+    public static Assembly RunFull(IEnumerable<string> sources, IIncrementalGenerator generator)
     {
-        var syntaxTree = CSharpSyntaxTree.ParseText(source);
-        var references = AppDomain.CurrentDomain.GetAssemblies()
+        var syntaxTrees = sources.Select(code => CSharpSyntaxTree.ParseText(code));
+
+        var assemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
+        assemblies.Add(typeof(AddSkybeamExtension).Assembly);
+
+        var references = assemblies
             .Where(a => !a.IsDynamic && !string.IsNullOrWhiteSpace(a.Location))
             .Select(a => MetadataReference.CreateFromFile(a.Location))
             .Cast<MetadataReference>();
 
         var compilation = CSharpCompilation.Create(
-            "InMemoryAssembly",
-            [syntaxTree],
+            "GeneratorTestAssembly",
+            syntaxTrees,
             references,
             new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
 
-        using MemoryStream ms = new();
-        EmitResult result = compilation.Emit(ms);
-    
-        if (result.Success)
-        {
-            Assert.True(true, "Compilation succeeded.");
-        }
-        else
-        {
-            var sb = new StringBuilder();
+        GeneratorDriver driver = CSharpGeneratorDriver
+            .Create(generator)
+            .RunGeneratorsAndUpdateCompilation(compilation, out var updatedCompilation, out var diagnostics);
 
-            sb.AppendLine("Compilation failed. Errors:");
-            foreach (var diagnostic in result.Diagnostics
-                         .Where(d => d.Severity == DiagnosticSeverity.Error))
-            {
-                sb.AppendLine(diagnostic.ToString());
-            }
-            string message = sb.ToString();
-
-            Assert.Fail(message);
+        if (diagnostics.Any(d => d.Severity == DiagnosticSeverity.Error))
+        {
+            throw new InvalidOperationException("Generator produced errors: " +
+                string.Join(Environment.NewLine, diagnostics));
         }
+
+        using var ms = new MemoryStream();
+        var emitResult = updatedCompilation.Emit(ms);
+
+        if (!emitResult.Success)
+        {
+            var errors = string.Join(Environment.NewLine,
+                emitResult.Diagnostics.Where(d => d.Severity == DiagnosticSeverity.Error));
+            throw new InvalidOperationException("Emit failed: " + errors);
+        }
+
+        ms.Seek(0, SeekOrigin.Begin);
+        return Assembly.Load(ms.ToArray());
     }
 }

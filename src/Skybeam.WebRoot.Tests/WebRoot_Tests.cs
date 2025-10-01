@@ -12,12 +12,12 @@ using Skybeam.WebRoot.Handlers;
 
 namespace Skybeam.WebRoot.Tests;
 
-public class WebRootTests
+public class WebRoot_Tests
 {
     private readonly InMemoryLoggerProvider loggerProvider = new();
     private readonly ServiceCollection services = new();
 
-    public WebRootTests(ITestOutputHelper output)
+    public WebRoot_Tests(ITestOutputHelper output)
     {
         services.AddLogging();
         services.AddSingleton<ILoggerProvider>(loggerProvider);

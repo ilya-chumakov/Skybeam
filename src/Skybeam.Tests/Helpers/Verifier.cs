@@ -4,7 +4,6 @@ using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Testing;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Skybeam.Abstractions;
-using Skybeam;
 
 namespace Skybeam.Tests.Helpers;
 
