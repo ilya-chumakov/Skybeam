@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Skybeam;
 
-public static class RegistryTextEmitter
+internal static class RegistryTextEmitter
 {
     public static SourceText CreateSourceText(IReadOnlyList<PipelineDescription> pipelines)
     {

@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Skybeam;
 
-public static class PipelineTextEmitter
+internal static class PipelineTextEmitter
 {
     public static readonly AssemblyName EmitterAssemblyName = typeof(PipelineTextEmitter).Assembly.GetName();
     public const string NamespacePrefix = "FancyGlobalPrefix";

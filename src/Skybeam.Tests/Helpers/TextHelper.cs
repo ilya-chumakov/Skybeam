@@ -5,7 +5,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Skybeam.Tests.Helpers;
 
-public class TextHelper
+internal class TextHelper
 {
     public static void AssertEquality(string expected, HandlerDescription handler, List<BehaviorDescription> behaviors)
     {

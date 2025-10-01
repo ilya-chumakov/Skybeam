@@ -2,7 +2,7 @@
 
 namespace Skybeam.Tests.Snapshots.NoBehaviors;
 
-public class SourceDescription : SourceDescriptionBase
+internal class SourceDescription : SourceDescriptionBase
 {
     public SourceDescription()
     {

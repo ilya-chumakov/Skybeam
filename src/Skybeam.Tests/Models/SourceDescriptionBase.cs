@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Skybeam.Tests.Models;
 
-public abstract class SourceDescriptionBase
+internal abstract class SourceDescriptionBase
 {
     public string FolderName => GetFolder(GetType());
     public List<HandlerDescription> Handlers { get; init; } = [];

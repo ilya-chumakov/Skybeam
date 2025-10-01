@@ -1,6 +1,6 @@
 namespace Skybeam;
 
-public record HandlerDescription(
+internal record HandlerDescription(
     string Name,
     string FullName,
     string ContainingNamespace,
@@ -8,8 +8,8 @@ public record HandlerDescription(
     string OutputFullName,
     string PipelineSuffix = "");
 
-public record BehaviorDescription(string FullNamePrefix);
+internal record BehaviorDescription(string FullNamePrefix);
 
-public record PipelineDescription(
+internal record PipelineDescription(
     HandlerDescription HandlerDescription,
     string FullName);

@@ -2,7 +2,7 @@
 
 namespace Skybeam;
 
-public static class IndentedTextWriterExtensions
+internal static class IndentedTextWriterExtensions
 {
     public static void OpenBlock(this IndentedTextWriter writer)
     {

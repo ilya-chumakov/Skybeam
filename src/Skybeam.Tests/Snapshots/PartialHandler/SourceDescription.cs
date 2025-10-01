@@ -3,7 +3,7 @@ using Skybeam.Tests.Models;
 
 namespace Skybeam.Tests.Snapshots.PartialHandler;
 
-public class SourceDescription : SourceDescriptionBase
+internal class SourceDescription : SourceDescriptionBase
 {
     public SourceDescription()
     {

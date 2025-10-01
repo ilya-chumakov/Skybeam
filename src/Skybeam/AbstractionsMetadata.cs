@@ -1,6 +1,6 @@
 ﻿namespace Skybeam;
 
-public class AbstractionsMetadata
+internal class AbstractionsMetadata
 {
     public static AbstractionsMetadata Instance { get; internal set; } = new();
 

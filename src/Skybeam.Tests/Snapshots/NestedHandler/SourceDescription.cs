@@ -3,7 +3,7 @@ using Skybeam.Tests.Models;
 
 namespace Skybeam.Tests.Snapshots.NestedHandler;
 
-public class SourceDescription : SourceDescriptionBase
+internal class SourceDescription : SourceDescriptionBase
 {
     public SourceDescription()
     {

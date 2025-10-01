@@ -30,7 +30,8 @@ public class SkybeamFluentBuilder(IServiceCollection services)
         return this;
     }
 }
-public static class EnumerableExtensions
+
+internal static class EnumerableExtensions
 {
     public static HashSet<T> ToHashSet<T>(this IEnumerable<T> source) => [..source];
 }
