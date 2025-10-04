@@ -33,7 +33,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Skybeam.Abstractions\Skybeam.Abstractions.csproj" />
     <ProjectReference Include="..\Skybeam\Skybeam.csproj" />
-    <ProjectReference Include="..\Skybeam.Internal\Skybeam.Internal.csproj" />
+    <ProjectReference Include="..\Skybeam.ServiceRegistration\Skybeam.ServiceRegistration.csproj" />
   </ItemGroup>
 
   <ItemGroup>

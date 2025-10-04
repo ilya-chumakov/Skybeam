@@ -11,7 +11,7 @@
     <!--<IsPackable>true</IsPackable>-->
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IncludeBuildOutput>true</IncludeBuildOutput>
-    <Version>0.1.0-beta8</Version>
+    <Version>0.1.0-beta10-sr</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,29 +19,36 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="3.3.4">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.14.0" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Skybeam.Internal\Skybeam.Internal.csproj" PrivateAssets="all" />
+    <ProjectReference Include="..\Skybeam.ServiceRegistration\Skybeam.ServiceRegistration.csproj" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="bin\Release\netstandard2.0\\Skybeam.dll" />
+
     <InternalsVisibleTo Include="Skybeam.Tests" />
+
+    <AdditionalFiles Include="BannedSymbols.txt" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- Pack the generator dll in the analyzers/dotnet/cs path -->
     <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
     <None Remove="bin\Release\netstandard2.0\\Skybeam.Abstractions.dll" />
-    <None Remove="bin\Release\netstandard2.0\\Skybeam.Internal.dll" />
+    <None Remove="bin\Release\netstandard2.0\\Skybeam.ServiceRegistration.dll" />
 
     <!-- Pack the attributes dll in the analyzers/dotnet/cs path --><!--
     <None Include="$(OutputPath)\Skybeam.Abstractions.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />-->
 
     <!-- Pack the attributes dll in the lib\netstandard2.0 path -->
     <None Include="$(OutputPath)\Skybeam.Abstractions.dll" Pack="true" PackagePath="lib\netstandard2.0" Visible="true" />
-    <None Include="$(OutputPath)\Skybeam.Internal.dll" Pack="true" PackagePath="lib\netstandard2.0" Visible="true" />
+    <None Include="$(OutputPath)\Skybeam.ServiceRegistration.dll" Pack="true" PackagePath="lib\netstandard2.0" Visible="true" />
   </ItemGroup>
 </Project>

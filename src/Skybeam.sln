@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		restore.bat = restore.bat
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skybeam.Internal", "Skybeam.Internal\Skybeam.Internal.csproj", "{37CE0771-8E4F-41ED-A69B-CFA1ADE0BE06}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skybeam.ServiceRegistration", "Skybeam.ServiceRegistration\Skybeam.ServiceRegistration.csproj", "{37CE0771-8E4F-41ED-A69B-CFA1ADE0BE06}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skybeam.WebRoot", "Skybeam.WebRoot\Skybeam.WebRoot.csproj", "{5EF83D8D-8254-4F42-A515-EED0771EC5A4}"
 EndProject

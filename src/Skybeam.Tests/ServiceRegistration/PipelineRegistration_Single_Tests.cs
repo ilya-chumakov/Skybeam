@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Skybeam.Abstractions;
 
-namespace Skybeam.Tests.Internal;
+namespace Skybeam.Tests.ServiceRegistration;
 
 public class PipelineRegistration_Single_Tests
 {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Skybeam.Abstractions;
 
-namespace Skybeam.Tests.Internal;
+namespace Skybeam.Tests.ServiceRegistration;
 
 // hard to isolate due to per-assembly registries
 public class AddSkybeam_AssemblyScan_Tests

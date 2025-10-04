@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Skybeam.Abstractions;
 
-namespace Skybeam.Tests.Internal;
+namespace Skybeam.Tests.ServiceRegistration;
 
 public class RegistrationVerifier_Tests
 {

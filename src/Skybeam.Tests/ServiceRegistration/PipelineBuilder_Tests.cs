@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 using Skybeam.Abstractions;
 using ILoggerProvider = Microsoft.Extensions.Logging.ILoggerProvider;
 
-namespace Skybeam.Tests.Internal;
+namespace Skybeam.Tests.ServiceRegistration;
 
 public class PipelineBuilder_Tests
 {

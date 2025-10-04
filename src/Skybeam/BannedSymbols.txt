@@ -1,0 +1,9 @@
+# Ban accident usage of runtime dependencies. Such usage has NO negative effects, but creates unnecessary coupling.
+
+T:Skybeam.SkybeamOptions ;Do not use startup service registration types in the generator
+T:Skybeam.AddSkybeamExtension
+T:Skybeam.DelayedLog
+T:Skybeam.DelayedLogHostedService
+T:Skybeam.RegistrationExtensions
+T:Skybeam.RegistrationVerifier
+T:Skybeam.SkybeamFluentBuilder

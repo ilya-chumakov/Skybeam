@@ -6,7 +6,7 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Skybeam.Abstractions;
 
-namespace Skybeam.Tests.Internal;
+namespace Skybeam.Tests.ServiceRegistration;
 
 public class PipelineRegistration_CompositeHandler_Tests
 {
