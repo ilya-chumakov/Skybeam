@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="Skybeam" />
     <InternalsVisibleTo Include="Skybeam.Tests" />
   </ItemGroup>
 

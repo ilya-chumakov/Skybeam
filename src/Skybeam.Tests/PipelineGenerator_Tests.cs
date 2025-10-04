@@ -86,7 +86,7 @@ public class PipelineGenerator_Tests(ITestOutputHelper output)
 
             for (int i = 0; i < description.Handlers.Count; i++)
             {
-                (SourceText text, var pipeline) = PipelineTextEmitter.CreateSourceText(
+                (SourceText text, var pipeline) = PipelineEmitter.CreateSourceText(
                     description.Handlers[i], description.Behaviors);
 
                 string actual = text.ToString();
@@ -97,8 +97,8 @@ public class PipelineGenerator_Tests(ITestOutputHelper output)
                 textResults.Add(pipelineResult);
             }
 
-            string actualContext = RegistryTextEmitter.CreateSourceText(pipelines, "TestProject").ToString();
-            //string actualContext = RegistryTextEmitter.CreateSourceText(pipelines, description.FolderName).ToString();
+            string actualContext = RegistryEmitter.CreateSourceText(pipelines, "TestProject").ToString();
+            //string actualContext = RegistryEmitter.CreateSourceText(pipelines, description.FolderName).ToString();
 
             var registryResult = Compare(expectedFiles[^1], actualContext);
             textResults.Add(registryResult);

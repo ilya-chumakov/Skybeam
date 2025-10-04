@@ -33,13 +33,13 @@ public class PipelineRegistry_Tests
         Assembly assembly = CompilationHelper.RunFull(sources, generator);
         
         string sourceNamespace = "Skybeam.Tests.Snapshots.OneBehavior";
-        string pipelineNamespace = $"{PipelineTextEmitter.NamespacePrefix}.Skybeam.Tests.Snapshots.OneBehavior";
+        string pipelineNamespace = $"{PipelineEmitter.NamespacePrefix}.Skybeam.Tests.Snapshots.OneBehavior";
         
         Type alphaType = assembly.GetType($"{sourceNamespace}.Alpha")!;
         Type omegaType = assembly.GetType($"{sourceNamespace}.Omega")!;
         Type handlerType = assembly.GetType($"{sourceNamespace}.BarHandler")!;
         Type pipelineType = assembly.GetType($"{pipelineNamespace}.BarHandlerPipeline")!;
-        Type registryType = assembly.GetType($"{PipelineTextEmitter.NamespacePrefix}.GeneratorTestAssembly.PipelineRegistry")!;
+        Type registryType = assembly.GetType($"{PipelineEmitter.NamespacePrefix}.GeneratorTestAssembly.PipelineRegistry")!;
         
         alphaType.Should().NotBeNull();
         omegaType.Should().NotBeNull();

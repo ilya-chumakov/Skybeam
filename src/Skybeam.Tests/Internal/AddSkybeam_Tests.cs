@@ -19,6 +19,7 @@ public class AddSkybeam_AssemblyScan_Tests
         services.AddSkybeam(options =>
         {
             options.ScanAssemblies = [typeof(DummyRegistry).Assembly];
+            options.RegistryFilter = t => t == typeof(DummyRegistry);
         });
         int expected = services.Count;
 
@@ -29,6 +30,7 @@ public class AddSkybeam_AssemblyScan_Tests
         services.AddSkybeam(options =>
         {
             options.ScanAssemblies = [typeof(DummyRegistry).Assembly];
+            options.RegistryFilter = t => t == typeof(DummyRegistry);
         });
         Assert.Equal(expected, services.Count);
     }

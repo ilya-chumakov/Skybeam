@@ -11,7 +11,7 @@
     <!--<IsPackable>true</IsPackable>-->
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IncludeBuildOutput>true</IncludeBuildOutput>
-    <Version>0.1.0-beta7</Version>
+    <Version>0.1.0-beta8</Version>
   </PropertyGroup>
 
   <ItemGroup>

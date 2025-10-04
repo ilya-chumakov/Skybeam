@@ -7,6 +7,11 @@ namespace Skybeam;
 public class SkybeamOptions
 {
     public IReadOnlyCollection<Assembly> ScanAssemblies = null;
+
+    /// <summary>
+    /// Useful for test isolation after an app-wide assembly scan. Not a part of a public API. 
+    /// </summary>
+    internal Func<Type, bool> RegistryFilter = null;
 }
 
 // InternalsVisibleTo won't work if directly called from another assembly
@@ -57,13 +62,14 @@ public static class AddSkybeamExtension
 
         object[] parameters = [services];
         List<Type> foundRegistryTypes = new();
+        Func<Type, bool> filter = t => options.RegistryFilter == null || options.RegistryFilter.Invoke(t);
 
         foreach (Assembly assembly in assemblies)
         {
             IEnumerable<Type> types = assembly.GetTypes().Where(type =>
                 RegistryInterface.IsAssignableFrom(type) && type != RegistryInterface);
 
-            foreach (Type registryType in types)
+            foreach (Type registryType in types.Where(filter))
             {
                 var registry = InvokeApplyMethod(registryType, parameters);
                 foundRegistryTypes.Add(registryType);

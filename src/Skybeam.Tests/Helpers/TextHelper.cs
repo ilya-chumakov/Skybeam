@@ -9,10 +9,10 @@ internal class TextHelper
 {
     public static void AssertEquality(string expected, HandlerDescription handler, List<BehaviorDescription> behaviors)
     {
-        (SourceText actual, _) = PipelineTextEmitter.CreateSourceText(handler, behaviors);
+        (SourceText actual, _) = PipelineEmitter.CreateSourceText(handler, behaviors);
 
         string[] expectedLines = LineEndingsHelper.Normalize(expected)
-            .Replace("%VERSION%", typeof(PipelineTextEmitter).Assembly.GetName().Version?.ToString())
+            .Replace("%VERSION%", typeof(PipelineEmitter).Assembly.GetName().Version?.ToString())
             .Split(Environment.NewLine);
 
         bool areEqual = RoslynTestUtils.CompareLines(expectedLines, actual, out string errorMessage);
@@ -35,7 +35,7 @@ internal class TextHelper
         string actual)
     {
         string expectedNormalized = LineEndingsHelper.Normalize(expected)
-            .Replace("%VERSION%", typeof(PipelineTextEmitter).Assembly.GetName().Version?.ToString());
+            .Replace("%VERSION%", typeof(PipelineEmitter).Assembly.GetName().Version?.ToString());
 
         if (actual == expectedNormalized) return null;
 

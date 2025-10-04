@@ -8,7 +8,7 @@ namespace Skybeam.Tests.Helpers;
 public static class SnapshotReader
 {
     private static readonly string GeneratorAssemblyVersion =
-        typeof(PipelineTextEmitter).Assembly.GetName().Version?.ToString();
+        typeof(PipelineEmitter).Assembly.GetName().Version?.ToString();
 
     public static async Task<List<TestFile>> ReadAsync(
         string folderName,
@@ -36,14 +36,21 @@ public static class SnapshotReader
 
         string normalized = LineEndingsHelper.Normalize(content)
             .Replace("%VERSION%", GeneratorAssemblyVersion)
+            
+            // Setting up namespaces for the generated code.
+            // Registry namespace:
             .Replace(
-                $"namespace SnapshotNamespacePlaceholder.{folderName};", 
-                //$"namespace {PipelineTextEmitter.NamespacePrefix}.{folderName};"
-
                 //had to use "TestProject" due to hard-coded DefaultTestProjectName in CSharpSourceGeneratorTest
-                $"namespace {PipelineTextEmitter.NamespacePrefix}.TestProject;"
-                )
-            ;
+                $"namespace RegistryNamespacePlaceholder.{folderName};", 
+                $"namespace {PipelineEmitter.NamespacePrefix}.TestProject;"
+                //$"namespace {PipelineEmitter.NamespacePrefix}.{folderName};"
+            )
+            
+            // Pipeline namespace:
+            // optional. easier to read to move around namespaces
+            .Replace(
+                $"PipelineNamespacePlaceholder.", 
+                $"{PipelineEmitter.NamespacePrefix}.");
 
         return normalized;
     }

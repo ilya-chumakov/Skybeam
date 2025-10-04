@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
+using Skybeam.Abstractions;
 
 // ReSharper disable PreferConcreteValueOverDefault
 // ReSharper disable RedundantLambdaParameterType
@@ -64,13 +65,13 @@ public class PipelineGenerator : IIncrementalGenerator
             foreach (HandlerDescription handler in handlers) 
             {
                 string filename = $"{handler.Name}_Pipeline{handler.PipelineSuffix}.g.cs";
-                (SourceText text, PipelineDescription pd) = PipelineTextEmitter.CreateSourceText(handler, behaviors);
+                (SourceText text, PipelineDescription pd) = PipelineEmitter.CreateSourceText(handler, behaviors);
                 ctx.AddSource(filename, text);
 
                 pipelines.Add(pd);
             }
             
-            SourceText registration = RegistryTextEmitter.CreateSourceText(pipelines, ns);
+            SourceText registration = RegistryEmitter.CreateSourceText(pipelines, ns);
             ctx.AddSource("PipelineRegistry.g.cs", registration);
         });
     }

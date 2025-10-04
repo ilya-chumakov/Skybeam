@@ -6,11 +6,11 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Skybeam;
 
-internal static class RegistryTextEmitter
+internal static class RegistryEmitter
 {
     public static SourceText CreateSourceText(IReadOnlyList<PipelineDescription> pipelines, string compilationNamespace)
     {
-        string registryNamespace = $"{PipelineTextEmitter.NamespacePrefix}.{compilationNamespace}";
+        string registryNamespace = $"{PipelineEmitter.NamespacePrefix}.{compilationNamespace}";
 
         using var sw = new StringWriter();
         using var writer = new IndentedTextWriter(sw, "    ");
@@ -26,7 +26,7 @@ internal static class RegistryTextEmitter
         writer.WriteLine();
 
         writer.Write("[global::System.CodeDom.Compiler.GeneratedCodeAttribute(");
-        writer.WriteLine($"\"{PipelineTextEmitter.EmitterAssemblyName.Name}\", \"{PipelineTextEmitter.EmitterAssemblyName.Version}\")]");
+        writer.WriteLine($"\"{PipelineEmitter.EmitterAssemblyName.Name}\", \"{PipelineEmitter.EmitterAssemblyName.Version}\")]");
         writer.WriteLine("[global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Always)]");
         writer.WriteLine();
 

@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using Skybeam.Abstractions;
-using FancyGlobalPrefix;
-using FancyGlobalPrefix.Skybeam.WebRoot.Handlers;
 using FluentAssertions;
 using Meziantou.Extensions.Logging.InMemory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Skybeam.Skybeam.WebRoot;
+using Skybeam.Skybeam.WebRoot.Handlers;
 using Skybeam.WebRoot.Handlers;
 
 // ReSharper disable InconsistentNaming
@@ -58,7 +58,7 @@ public class WebRoot_Tests
     public void Wrapper_AvailableViaReflection_OK()
     {
         var type = Assembly.GetAssembly(typeof(FooQueryHandler))!
-            .GetType("FancyGlobalPrefix.Skybeam.WebRoot.Handlers.FooQueryHandlerPipeline", true, true);
+            .GetType("Skybeam.Skybeam.WebRoot.Handlers.FooQueryHandlerPipeline", true, true);
 
         type.Should().NotBeNull();
     }

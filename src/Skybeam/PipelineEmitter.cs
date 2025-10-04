@@ -8,10 +8,10 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Skybeam;
 
-internal static class PipelineTextEmitter
+internal static class PipelineEmitter
 {
-    public static readonly AssemblyName EmitterAssemblyName = typeof(PipelineTextEmitter).Assembly.GetName();
-    public const string NamespacePrefix = "FancyGlobalPrefix";
+    public static readonly AssemblyName EmitterAssemblyName = typeof(PipelineEmitter).Assembly.GetName();
+    public const string NamespacePrefix = "Skybeam";
 
     public static (SourceText text, PipelineDescription pd) CreateSourceText(
         HandlerDescription handler,
