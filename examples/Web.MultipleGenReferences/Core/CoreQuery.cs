@@ -1,4 +1,4 @@
-﻿namespace Demo.DecoratedHandlers.Core;
+﻿namespace Core;
 
 public class CoreQuery
 {

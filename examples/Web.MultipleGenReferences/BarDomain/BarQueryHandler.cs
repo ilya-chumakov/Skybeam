@@ -1,7 +1,7 @@
-﻿using Demo.DecoratedHandlers.Abstractions;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
+using Skybeam.Abstractions;
 
-namespace Demo.DecoratedHandlers.BarDomain;
+namespace BarDomain;
 
 public class BarQueryHandler(ILogger<BarQueryHandler> logger) 
     : IRequestHandler<BarQuery, BarResponse>

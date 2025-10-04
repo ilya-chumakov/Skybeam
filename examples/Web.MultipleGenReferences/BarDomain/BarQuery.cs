@@ -1,4 +1,4 @@
-﻿namespace Demo.DecoratedHandlers.BarDomain;
+﻿namespace BarDomain;
 
 public class BarQuery
 {

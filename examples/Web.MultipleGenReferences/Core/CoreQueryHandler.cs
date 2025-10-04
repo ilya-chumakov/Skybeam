@@ -1,7 +1,7 @@
-﻿using Demo.DecoratedHandlers.Abstractions;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
+using Skybeam.Abstractions;
 
-namespace Demo.DecoratedHandlers.Core;
+namespace Core;
 
 public class CoreQueryHandler(ILogger<CoreQueryHandler> logger) 
     : IRequestHandler<CoreQuery, CoreResponse>

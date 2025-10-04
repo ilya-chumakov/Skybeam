@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Skybeam" Version="1.0.18" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.7" />
+    <PackageReference Include="Skybeam" Version="0.1.0-beta6" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.9" />
   </ItemGroup>
 
   <ItemGroup>

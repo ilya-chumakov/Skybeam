@@ -1,4 +1,4 @@
-﻿namespace Demo.DecoratedHandlers.FooDomain;
+﻿namespace FooDomain;
 
 public class FooQuery
 {

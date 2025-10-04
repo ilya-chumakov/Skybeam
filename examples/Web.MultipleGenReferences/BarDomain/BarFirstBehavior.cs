@@ -1,7 +1,7 @@
-﻿using Demo.DecoratedHandlers.Abstractions;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
+using Skybeam.Abstractions;
 
-namespace Demo.DecoratedHandlers.BarDomain;
+namespace BarDomain;
 
 public class BarFirstBehavior<TRequest, TResponse>(ILogger<BarFirstBehavior<TRequest, TResponse>> logger)
     : IPipelineBehavior<TRequest, TResponse> where TRequest : notnull

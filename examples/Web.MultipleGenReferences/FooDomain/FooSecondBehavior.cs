@@ -1,7 +1,7 @@
-﻿using Demo.DecoratedHandlers.Abstractions;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
+using Skybeam.Abstractions;
 
-namespace Demo.DecoratedHandlers.FooDomain;
+namespace FooDomain;
 
 public class FooSecondBehavior<TRequest, TResponse>(ILogger<FooSecondBehavior<TRequest, TResponse>> logger)
     : IPipelineBehavior<TRequest, TResponse>

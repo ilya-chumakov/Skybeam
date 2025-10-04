@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Demo.DecoratedHandlers.WebApiRoot.Controllers
+namespace WebApiRoot.Controllers
 {
     [ApiController]
     [Route("[controller]")]

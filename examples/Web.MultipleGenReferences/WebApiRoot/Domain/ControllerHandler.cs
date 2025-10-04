@@ -1,6 +1,6 @@
-﻿using Demo.DecoratedHandlers.Abstractions;
+﻿using Skybeam.Abstractions;
 
-namespace Demo.DecoratedHandlers.WebApiRoot.Domain;
+namespace WebApiRoot.Domain;
 
 public record ControllerInput(int Id);
 public record ControllerOutput(int Id, string Name);

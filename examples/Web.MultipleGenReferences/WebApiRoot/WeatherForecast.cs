@@ -1,4 +1,4 @@
-namespace Demo.DecoratedHandlers.WebApiRoot
+namespace WebApiRoot
 {
     public class WeatherForecast
     {

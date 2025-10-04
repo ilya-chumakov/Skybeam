@@ -1,6 +1,4 @@
-﻿using Demo.DecoratedHandlers.Abstractions;
-
-namespace Demo.DecoratedHandlers.WebApiRoot;
+﻿namespace WebApiRoot;
 
 public class WebRootRegistry //: IPipelineRegistry
 {
