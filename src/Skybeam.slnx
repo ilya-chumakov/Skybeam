@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="../README.md" />
+    <File Path="global.json" />
+    <File Path="restore.bat" />
+  </Folder>
+  <Project Path="Skybeam.Abstractions/Skybeam.Abstractions.csproj" />
+  <Project Path="Skybeam.ServiceRegistration/Skybeam.ServiceRegistration.csproj" />
+  <Project Path="Skybeam.Tests/Skybeam.Tests.csproj" />
+  <Project Path="Skybeam.WebRoot.Tests/Skybeam.WebRoot.Tests.csproj" />
+  <Project Path="Skybeam.WebRoot/Skybeam.WebRoot.csproj" />
+  <Project Path="Skybeam/Skybeam.csproj" />
+</Solution>
