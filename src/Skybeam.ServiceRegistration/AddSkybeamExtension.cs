@@ -1,20 +1,10 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
 using Skybeam.Abstractions;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Skybeam;
 
-public class SkybeamOptions
-{
-    public IReadOnlyCollection<Assembly> ScanAssemblies = null;
-
-    /// <summary>
-    /// Useful for test isolation after an app-wide assembly scan. Not a part of a public API. 
-    /// </summary>
-    internal Func<Type, bool> RegistryFilter = null;
-}
-
-// InternalsVisibleTo won't work if directly called from another assembly
 public static class AddSkybeamExtension
 {
     private static readonly Type RegistryInterface = typeof(IPipelineRegistry);
@@ -26,6 +16,20 @@ public static class AddSkybeamExtension
         Verifier = new RegistrationVerifier(Log);
     }
 
+    /// <summary>
+    /// Add source-generated pipelines to the services list.
+    /// <br/>
+    /// As a part of recommended setup, reference Skybeam package once per app and call <see cref="AddSkybeam&lt;TPipelineRegistry&gt;"/>
+    /// providing a single generated pipeline registry as a parameter.
+    /// <br/>
+    /// Prior handler registration is not needed. Existing handler registrations are replaced with their respectful pipeline registrations as well.
+    /// <br/>
+    /// </summary>
+    /// <typeparam name="TPipelineRegistry">Source-generated pipeline registry</typeparam>
+    /// <param name="services"></param>
+    /// <remarks>
+    /// This method is safe to call multiple times.
+    /// </remarks>
     public static SkybeamFluentBuilder AddSkybeam<TPipelineRegistry>(
         this IServiceCollection services)
         where TPipelineRegistry : IPipelineRegistry, new()
@@ -39,6 +43,21 @@ public static class AddSkybeamExtension
         return new SkybeamFluentBuilder(services);
     }
 
+    /// <summary>
+    /// Add source-generated pipelines to the services list. This method is an optional fallback to a reflection-based assembly scan.
+    /// <br/>
+    /// As a part of recommended setup, reference Skybeam package once per app and call <see cref="AddSkybeam&lt;TPipelineRegistry&gt;"/>
+    /// providing a single generated pipeline registry as a parameter.
+    /// <br/>
+    /// Prior handler registration is not needed. Existing handler registrations are replaced with their respectful pipeline registrations as well.
+    /// <br/>
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="setup"></param>
+    /// <remarks>
+    /// This method is safe to call multiple times.
+    /// This method is NOT AOT-friendly.
+    /// </remarks>
     public static SkybeamFluentBuilder AddSkybeam(
         this IServiceCollection services,
         Action<SkybeamOptions> setup = null)

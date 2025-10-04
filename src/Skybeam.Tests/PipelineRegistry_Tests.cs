@@ -49,12 +49,12 @@ public class PipelineRegistry_Tests
         
         Type closedHandlerInterfaceType = typeof(IRequestHandler<,>).MakeGenericType(alphaType, omegaType);
         
-        MethodInfo applyMethod = registryType.GetMethod("Apply");
+        MethodInfo generatedRegistryApplyMethod = registryType.GetMethod("Apply");
         object registry = Activator.CreateInstance(registryType);
         IServiceCollection services = new ServiceCollection();
         
         // Act
-        applyMethod?.Invoke(registry, [services]);
+        generatedRegistryApplyMethod?.Invoke(registry, [services]);
         
         // Assert
         services.Any(d => d.ServiceType == handlerType && d.ImplementationType == handlerType).Should().BeTrue();

@@ -7,7 +7,7 @@ internal class DelayedLogHostedService(ILogger<DelayedLogHostedService> logger) 
 {
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        AddSkybeamExtension.Log.Apply(logger);
+        AddSkybeamExtension.Log.Replay(logger);
 
         return Task.CompletedTask;
     }

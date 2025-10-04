@@ -21,7 +21,7 @@ internal class DelayedLog
         }
     }
 
-    public void Apply(ILogger logger)
+    public void Replay(ILogger logger)
     {
         foreach (var action in Logs)
         {
