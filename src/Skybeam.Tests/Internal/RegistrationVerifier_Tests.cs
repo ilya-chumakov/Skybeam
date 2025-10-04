@@ -29,34 +29,34 @@ public class RegistrationVerifier_Tests
     }
 
     [Fact]
-    public void VerifyServices_NoRegistrations_ProducesLogs()
+    public void VerifyServiceRegistrations_NoRegistrations_ProducesLogs()
     {
         //Arrange
         RegistrationVerifier verifier = new(_log);
 
         //Act
-        verifier.VerifyServices(_services);
+        verifier.VerifyServiceRegistrations(_services);
 
         //Assert
         Assert.Equal(1, _log.Count());
     }
 
     [Fact]
-    public void VerifyServices_HandlerRegistered_NoLogs()
+    public void VerifyServiceRegistrations_HandlerRegistered_NoLogs()
     {
         //Arrange
         _services.AddTransient<IRequestHandler<Foo, Bar>, FooBarHandler>();
         RegistrationVerifier verifier = new(_log);
 
         //Act
-        verifier.VerifyServices(_services);
+        verifier.VerifyServiceRegistrations(_services);
 
         //Assert
         Assert.Equal(0, _log.Count());
     }
 
     [Fact]
-    public void VerifyServices_HandlerWithTheSameInput_ProducesLogs()
+    public void VerifyServiceRegistrations_HandlerWithTheSameInput_ProducesLogs()
     {
         //Arrange
         _services.AddTransient<IRequestHandler<Foo, Bar>, FooBarHandler>();
@@ -64,7 +64,7 @@ public class RegistrationVerifier_Tests
         RegistrationVerifier verifier = new(_log);
 
         //Act
-        verifier.VerifyServices(_services);
+        verifier.VerifyServiceRegistrations(_services);
 
         //Assert
         Assert.Equal(1, _log.Count());

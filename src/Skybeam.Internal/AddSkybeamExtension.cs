@@ -27,7 +27,7 @@ public static class AddSkybeamExtension
     {
         IPipelineRegistry registry = new TPipelineRegistry();
         registry.Apply(services);
-        Verifier.VerifyServices(services);
+        Verifier.VerifyServiceRegistrations(services);
         Verifier.VerifyRegistry(registry);
         services.AddHostedService<DelayedLogHostedService>();
 
@@ -56,7 +56,7 @@ public static class AddSkybeamExtension
         }
 
         object[] parameters = [services];
-        List<Type> foundTypes = new();
+        List<Type> foundRegistryTypes = new();
 
         foreach (Assembly assembly in assemblies)
         {
@@ -66,13 +66,13 @@ public static class AddSkybeamExtension
             foreach (Type registryType in types)
             {
                 var registry = InvokeApplyMethod(registryType, parameters);
-                foundTypes.Add(registryType);
+                foundRegistryTypes.Add(registryType);
                 Verifier.VerifyRegistry(registry);
             }
         }
 
-        Verifier.VerifyRegistryCount(foundTypes);
-        Verifier.VerifyServices(services);
+        Verifier.VerifyRegistryCount(foundRegistryTypes);
+        Verifier.VerifyServiceRegistrations(services);
         services.AddHostedService<DelayedLogHostedService>();
         
         return new SkybeamFluentBuilder(services);

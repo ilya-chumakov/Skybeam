@@ -33,7 +33,7 @@ internal class RegistrationVerifier(DelayedLog log)
         }
     }
 
-    public void VerifyServices(IServiceCollection services)
+    public void VerifyServiceRegistrations(IServiceCollection services)
     {
         bool anyPipelineIsFound = services.Any(sd =>
             sd.ServiceType.IsGenericType &&
