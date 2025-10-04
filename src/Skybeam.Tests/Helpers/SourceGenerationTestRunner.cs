@@ -11,9 +11,11 @@ public static class SourceGenerationTestRunner
 {
     public static async Task AssertGenerationEquality(
         List<TestFile> sourceFiles, 
-        List<TestFile> expectedFiles)
+        List<TestFile> expectedFiles,
+        string compilationNamespace)
     {
         var test = new Verifier.Test();
+
         foreach (TestFile file in sourceFiles)
         {
             test.TestState.Sources.Add((filename: "SomeUnusedName.cs", content: file.Content));

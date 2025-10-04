@@ -39,7 +39,7 @@ public class PipelineRegistry_Tests
         Type omegaType = assembly.GetType($"{sourceNamespace}.Omega")!;
         Type handlerType = assembly.GetType($"{sourceNamespace}.BarHandler")!;
         Type pipelineType = assembly.GetType($"{pipelineNamespace}.BarHandlerPipeline")!;
-        Type registryType = assembly.GetType($"{PipelineTextEmitter.NamespacePrefix}.PipelineRegistry")!;
+        Type registryType = assembly.GetType($"{PipelineTextEmitter.NamespacePrefix}.GeneratorTestAssembly.PipelineRegistry")!;
         
         alphaType.Should().NotBeNull();
         omegaType.Should().NotBeNull();

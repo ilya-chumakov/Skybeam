@@ -97,7 +97,8 @@ public class PipelineGenerator_Tests(ITestOutputHelper output)
                 textResults.Add(pipelineResult);
             }
 
-            string actualContext = RegistryTextEmitter.CreateSourceText(pipelines).ToString();
+            string actualContext = RegistryTextEmitter.CreateSourceText(pipelines, "TestProject").ToString();
+            //string actualContext = RegistryTextEmitter.CreateSourceText(pipelines, description.FolderName).ToString();
 
             var registryResult = Compare(expectedFiles[^1], actualContext);
             textResults.Add(registryResult);
@@ -130,7 +131,7 @@ public class PipelineGenerator_Tests(ITestOutputHelper output)
         if (errors.Count > 0) Assert.Fail("Emitted text differs from a snapshot!");
 
         // generation
-        await SourceGenerationTestRunner.AssertGenerationEquality(sourceFiles, expectedFiles);
+        await SourceGenerationTestRunner.AssertGenerationEquality(sourceFiles, expectedFiles, description.FolderName);
     }
 
     private ComparisonResult Compare(TestFile expectedFile, string actual)

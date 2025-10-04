@@ -37,8 +37,11 @@ public static class SnapshotReader
         string normalized = LineEndingsHelper.Normalize(content)
             .Replace("%VERSION%", GeneratorAssemblyVersion)
             .Replace(
-                $"namespace Tests.{folderName};", 
-                $"namespace {PipelineTextEmitter.NamespacePrefix};"
+                $"namespace SnapshotNamespacePlaceholder.{folderName};", 
+                //$"namespace {PipelineTextEmitter.NamespacePrefix}.{folderName};"
+
+                //had to use "TestProject" due to hard-coded DefaultTestProjectName in CSharpSourceGeneratorTest
+                $"namespace {PipelineTextEmitter.NamespacePrefix}.TestProject;"
                 )
             ;
 

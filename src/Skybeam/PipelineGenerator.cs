@@ -42,11 +42,16 @@ public class PipelineGenerator : IIncrementalGenerator
             .Where(static symbol => symbol != default)
             .Collect();
 
-        var combination = handlers.Combine(behaviors);
+        var assemblyNameProvider = context.CompilationProvider
+            .Select((compilation, _) => compilation.AssemblyName);
+
+        var combination = handlers
+            .Combine(behaviors)
+            .Combine(assemblyNameProvider);
 
         context.RegisterImplementationSourceOutput(combination, static (ctx, symbols) =>
         {
-            var (handlers, behaviors) = symbols;
+            var ((handlers, behaviors), ns) = symbols;
 
             // nothing to do now if no behaviors
             if (behaviors.Length == 0) return;
@@ -64,8 +69,8 @@ public class PipelineGenerator : IIncrementalGenerator
 
                 pipelines.Add(pd);
             }
-
-            SourceText registration = RegistryTextEmitter.CreateSourceText(pipelines);
+            
+            SourceText registration = RegistryTextEmitter.CreateSourceText(pipelines, ns);
             ctx.AddSource("PipelineRegistry.g.cs", registration);
         });
     }
