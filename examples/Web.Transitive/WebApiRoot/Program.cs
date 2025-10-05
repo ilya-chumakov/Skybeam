@@ -1,4 +1,3 @@
-using BarDomain;
 using Core;
 using FooDomain;
 using Skybeam;
@@ -14,15 +13,15 @@ services.AddOpenApi();
 //services.AddTransient<IRequestHandler<FooQuery, FooResponse>, FooQueryHandler>();
 //services.AddTransient<IRequestHandler<BarQuery, BarResponse>, BarQueryHandler>();
 
-// has a registry per Skybeam package reference
-services.AddSkybeam();
+services.AddSkybeam()
+    .AddBehavior(typeof(WebBehavior<,>));
 
 var app = builder.Build();
 
-var alpha = app.Services.GetRequiredService<IRequestHandler<FooQuery, FooResponse>>();
-var beta = app.Services.GetRequiredService<IRequestHandler<BarQuery, BarResponse>>();
 var gamma = app.Services.GetRequiredService<IRequestHandler<CoreQuery, CoreResponse>>();
-var delta = app.Services.GetRequiredService<IRequestHandler<WebQuery, WebResponse>>();
+var foo = app.Services.GetRequiredService<IRequestHandler<FooQuery, FooResponse>>();
+var quux = app.Services.GetRequiredService<IRequestHandler<WebQuery, WebResponse>>();
+
 
 if (app.Environment.IsDevelopment())
 {

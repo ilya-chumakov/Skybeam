@@ -10,9 +10,11 @@ internal class SourceDescription : SourceDescriptionBase
             Name: nameof(BarHandler),
             FullName: GetDisplayFullName<BarHandler>(),
             ContainingNamespace: typeof(BarHandler).Namespace,
-            InputFullName: nameof(Alpha),
-            OutputFullName: nameof(Omega)));
+            InputFullName: GetDisplayFullName<Alpha>(),
+            OutputFullName: GetDisplayFullName<Omega>()));
             
-        SourceFiles.Add(DefaultSourceFile);
+        //SourceFiles.Add(DefaultSourceFile);
+        
+        AddDefaultFiles();
     }
 }

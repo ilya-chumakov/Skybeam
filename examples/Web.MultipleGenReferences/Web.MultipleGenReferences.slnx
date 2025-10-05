@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="restore.bat" />
+  </Folder>
+  <Project Path="BarDomain/BarDomain.csproj" />
+  <Project Path="Core/Core.csproj" />
+  <Project Path="FooDomain/FooDomain.csproj" />
+  <Project Path="WebApiRoot/WebApiRoot.csproj" />
+</Solution>

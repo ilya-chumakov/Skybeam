@@ -13,7 +13,7 @@ namespace Skybeam.Tests.ServiceRegistration;
 public class PipelineBuilder_Tests
 {
     [Fact]
-    public async Task Decorate_Invoke_BehaviorsExecuteInCorrectOrder()
+    public async Task Decorate_TwoBehaviors_RunCorrectOrder()
     {
         var loggerProvider = new InMemoryLoggerProvider();
         var services = new ServiceCollection();
@@ -45,6 +45,28 @@ public class PipelineBuilder_Tests
                 FooHandler.Message,
                 SecondBehavior<Alpha, Omega>.EndMessage,
                 FirstBehavior<Alpha, Omega>.EndMessage);
+    }
+
+    [Fact]
+    public async Task Decorate_NoBehaviors_RunOnlyHandler()
+    {
+        var loggerProvider = new InMemoryLoggerProvider();
+        var services = new ServiceCollection();
+        services.AddLogging();
+        services.AddSingleton<ILoggerProvider>(loggerProvider);
+
+        services.AddTransient<FooHandler>();
+
+        var sp = services.BuildServiceProvider();
+
+        RequestHandlerDelegate<Omega> target = PipelineBuilder.Decorate<FooHandler, Alpha, Omega>(
+            sp, new Alpha(), TestContext.Current.CancellationToken);
+
+        // Act
+        Omega output = await target.Invoke();
+
+        loggerProvider.Logs.Informations.Select(l => l.Message)
+            .Should().BeEquivalentTo(FooHandler.Message);
     }
 }
 

@@ -55,7 +55,9 @@ public class PipelineGenerator : IIncrementalGenerator
             var ((handlers, behaviors), ns) = symbols;
 
             // nothing to do now if no behaviors
-            if (behaviors.Length == 0) return;
+            // BUT deleting the last behavior should not break any code,
+            // therefore the registry should exist and stay in place even without behaviors
+            //if (behaviors.Length == 0) return;
 
             // distinct to support partial declarations
             behaviors = behaviors.Distinct().ToImmutableArray();

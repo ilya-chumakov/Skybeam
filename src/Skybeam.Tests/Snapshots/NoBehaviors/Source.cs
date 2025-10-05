@@ -12,6 +12,6 @@ public class BarHandler : IRequestHandler<Alpha, Omega>
 {
     public Task<Omega> HandleAsync(Alpha input, CancellationToken ct = default)
     {
-        return Task.FromResult(new Omega());
+        throw new NotSupportedException();
     }
 }
