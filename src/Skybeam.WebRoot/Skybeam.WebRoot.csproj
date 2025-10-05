@@ -7,12 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Skybeam" Version="0.1.0-beta10-sr" />
+    <PackageReference Include="Skybeam" Version="0.1.0-cd-setup-7" />
   </ItemGroup>
-
-  <ItemGroup>
-    <!--<ProjectReference Include="..\Skybeam.Abstractions\Skybeam.Abstractions.csproj" />-->
-    <!--<ProjectReference Include="..\Skybeam\Skybeam.csproj" />-->
-  </ItemGroup>
-
 </Project>

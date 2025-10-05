@@ -1,3 +1,5 @@
+[![NuGet](http://img.shields.io/nuget/v/Skybeam.svg?logo=nuget&color=blue)](https://www.nuget.org/packages/Skybeam/)
+
 # Skybeam
 Mediator-like service decoration without an actual mediator:
 - Improved code readability with explicit class dependencies and source generation. There is no `IMediator` or a service locator.
@@ -7,13 +9,13 @@ Mediator-like service decoration without an actual mediator:
 - Handler and behavior contracts are intentionally made similar to MediatR.
 - By now, it's more of a proof-of-concept project.
 
-If the only feature you need from MediatR is handler decoration, consider opting out. Handler decoration (middlewares, pipelines) can be implemented in many other ways:
+If the only feature you need from MediatR is decoration, consider opting out. CQRS handler decoration (in a form of middlewares, pipelines, behaviors etc.) can be implemented in many other ways:
 - Reflection + DI: the classic, robust, and most flexible approach - less explicit, not the fastest, and not AOT-friendly.
 - IL weaving: PostSharp etc.
 - Source generation + DI: Skybeam (this project).
 
 ## How to start
-Reference Skybeam package **directly** in every project having handlers. Preferably use `Directory.Build.props` in your solution for reliability.
+Reference Skybeam package **directly** in every project containing handlers. Preferably use `Directory.Build.props` in your solution to ensure that.
 
 Use `Skybeam.IRequestHandler` for the handlers:
 ```cs

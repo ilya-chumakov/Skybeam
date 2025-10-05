@@ -9,4 +9,6 @@
   <Project Path="Skybeam.ServiceRegistration/Skybeam.ServiceRegistration.csproj" />
   <Project Path="Skybeam.Tests/Skybeam.Tests.csproj" />
   <Project Path="Skybeam/Skybeam.csproj" />
+  <Project Path="Skybeam.WebRoot/Skybeam.WebRoot.csproj" />
+  <Project Path="Skybeam.WebRoot.Tests/Skybeam.WebRoot.Tests.csproj" />
 </Solution>

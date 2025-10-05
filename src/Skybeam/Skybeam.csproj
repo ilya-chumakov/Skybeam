@@ -2,16 +2,23 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+
+    <Authors>Ilya Chumakov</Authors>
+    <PackageProjectUrl>https://github.com/ilya-chumakov/Skybeam</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ilya-chumakov/Skybeam.git</RepositoryUrl>
+    <PackageTags>mediator;cqrs;dependency-injection;source-generator;request;response;query;command;middleware;behavior;pipeline;aot</PackageTags>
+    <Description>Source-generated service decoration without mediator. Fast, explicit, reflection-free.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <IsRoslynComponent>true</IsRoslynComponent>
-    <LangVersion>latest</LangVersion>
-    
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <IncludeBuildOutput>true</IncludeBuildOutput>
     <!--<OutputItemType>Analyzer</OutputItemType>-->
     <!--<PackageType>Analyzer</PackageType>-->
     <!--<IsPackable>true</IsPackable>-->
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <IncludeBuildOutput>true</IncludeBuildOutput>
-    <Version>0.1.0-beta12</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,10 +39,9 @@
 
   <ItemGroup>
     <None Remove="bin\Release\netstandard2.0\\Skybeam.dll" />
-
     <InternalsVisibleTo Include="Skybeam.Tests" />
-
     <AdditionalFiles Include="BannedSymbols.txt" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
